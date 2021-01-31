@@ -1,0 +1,2 @@
+/home/modestas/mode/Algoz/build/CMakeFiles/rebuild_cache.dir
+/home/modestas/mode/Algoz/build/CMakeFiles/edit_cache.dir
