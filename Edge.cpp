@@ -1,8 +1,10 @@
-#include "Edge.h"
 #include <algorithm>
+
+#include "Edge.h"
 
 using namespace std;
 
+Edge::Edge() {}
 Edge::Edge(int m_from, int m_to, int m_weight) {
     from  = m_from;
     to = m_to;

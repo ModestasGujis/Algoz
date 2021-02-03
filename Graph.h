@@ -1,4 +1,8 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include <algorithm>
+#include <vector>
 #include "Edge.h"
 
 using namespace std;
@@ -18,3 +22,5 @@ private:
 	vector<vector<Edge>> edges;
 
 };
+
+#endif // GRAPH_H
