@@ -9,7 +9,8 @@ using namespace std;
 
 class Graph {
 public:
-	Graph(int _vertexCnt = 0, bool weighted = false);
+	// Graph();
+	Graph(int _vertexCnt = 0, bool _weighted = false);
 	int getVertexCnt();
 	int getEdgeCnt();
 	void addEdge(int a, int b, int w = 1);
