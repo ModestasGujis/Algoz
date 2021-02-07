@@ -13,6 +13,7 @@ public:
 	int getTo();
 	int getWeight();
 private:
+	friend class Graph;
 	int from;
 	int to;
 	int weight;
