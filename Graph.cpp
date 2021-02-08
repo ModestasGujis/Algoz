@@ -136,7 +136,7 @@ vector<int> Graph::shortestPath(int a, int b) {
 }
 
 bool Graph::hasACycle() {
-	vector<bool> visited(vertexCnt, false);
+	vector<int> visited(vertexCnt, 0);
 
 	for (int i = 0; i < vertexCnt; ++i)
 	{
@@ -148,15 +148,46 @@ bool Graph::hasACycle() {
 	return false;
 }
 
-bool Graph::hasACycleUtil(int v, vector<bool> &visited) {
-	visited[v] = true;
+bool Graph::hasACycleUtil(int v, vector<int> &visited) {
+	visited[v] = 1;
 
 	for (Edge ed : edges[v]) {
-		if (visited[ed.to]) return true;
+		if (visited[ed.to] == 1) return true;
 
 		if (Graph::hasACycleUtil(ed.to, visited))
 			return true;
 	}
 
+	visited[v] = 2;
 	return false;
+}
+
+vector<int> Graph::topoSort() {
+	if (Graph::hasACycle()) return vector<int>();
+
+	vector<int> currSort;
+	vector<bool> visited(vertexCnt, false);
+
+	for (int i = 0; i < vertexCnt; ++i)
+	{
+		if (!visited[i]) {
+			topoSortUtil(i, currSort, visited);
+		}
+	}
+
+	reverse(currSort.begin(), currSort.end());
+
+	return currSort;
+}
+
+void Graph::topoSortUtil(int v, vector<int> &currSort, vector<bool> &visited) {
+	visited[v] = true;
+
+	for (Edge ed : edges[v]) {
+		if (!visited[ed.to]) {
+			Graph::topoSortUtil(ed.to, currSort, visited);
+		}
+	}
+
+	currSort.emplace_back(v);
 }

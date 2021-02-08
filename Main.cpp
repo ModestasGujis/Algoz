@@ -18,7 +18,8 @@ PYBIND11_MODULE(main, m) {
 	.def("getVertexCnt", &Graph::getVertexCnt)
 	.def("shortestDistance", &Graph::shortestDistance)
 	.def("shortestPath", &Graph::shortestPath)
-	.def("hasACycle", &Graph::hasACycle);
+	.def("hasACycle", &Graph::hasACycle)
+	.def("topoSort", &Graph::topoSort);
 
 	py::class_<DSU>(m, "DSU")
 	.def(py::init<int>())

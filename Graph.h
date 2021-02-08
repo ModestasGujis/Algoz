@@ -19,6 +19,7 @@ public:
 	int shortestDistance(int a, int b); // -1 if path doesn't exist
 	vector<int> shortestPath(int a, int b); // empty vector if ...
 	bool hasACycle();
+	vector<int> topoSort();
 private:
 	bool weighted;
 	int vertexCnt;
@@ -26,7 +27,8 @@ private:
 	vector<vector<Edge>> edges;
 	void getShortestOneToAllDijkstra(int from, vector<int> &dist, bool backtrack = false);
 	void getShortestOneToAllBFS(int from, vector<int> &dist, bool backtrack = false);
-	bool hasACycleUtil(int v, vector<bool> &visited);
+	bool hasACycleUtil(int v, vector<int> &visited);
+	void topoSortUtil(int v, vector<int> &currSort, vector<bool> &visited);
 };
 
 #endif // GRAPH_H
