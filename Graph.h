@@ -20,6 +20,7 @@ public:
 	vector<int> shortestPath(int a, int b); // empty vector if ...
 	bool hasACycle();
 	vector<int> topoSort();
+	vector<int> connectedComp(int v);
 private:
 	bool weighted;
 	int vertexCnt;
@@ -29,6 +30,7 @@ private:
 	void getShortestOneToAllBFS(int from, vector<int> &dist, bool backtrack = false);
 	bool hasACycleUtil(int v, vector<int> &visited);
 	void topoSortUtil(int v, vector<int> &currSort, vector<bool> &visited);
+	void connectedCompUtil(int v, vector<bool> &visited);
 };
 
 #endif // GRAPH_H

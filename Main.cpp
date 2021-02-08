@@ -19,7 +19,8 @@ PYBIND11_MODULE(main, m) {
 	.def("shortestDistance", &Graph::shortestDistance)
 	.def("shortestPath", &Graph::shortestPath)
 	.def("hasACycle", &Graph::hasACycle)
-	.def("topoSort", &Graph::topoSort);
+	.def("topoSort", &Graph::topoSort)
+	.def("connectedComp", &Graph::connectedComp);
 
 	py::class_<DSU>(m, "DSU")
 	.def(py::init<int>())

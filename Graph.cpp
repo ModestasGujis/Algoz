@@ -191,3 +191,25 @@ void Graph::topoSortUtil(int v, vector<int> &currSort, vector<bool> &visited) {
 
 	currSort.emplace_back(v);
 }
+
+vector<int> Graph::connectedComp(int v) {
+	vector<bool> visited(vertexCnt, false);
+	connectedCompUtil(v, visited);
+
+	vector<int> components;
+	for (int i = 0; i < vertexCnt; ++i)
+	{
+		if (visited[i])
+			components.emplace_back(i);
+	}
+
+	return components;
+}
+
+void Graph::connectedCompUtil(int v, vector<bool> &visited) {
+	visited[v] = true;
+
+	for (Edge ed : edges[v])
+		if (!visited[ed.to])
+			connectedCompUtil(ed.to, visited);
+}
