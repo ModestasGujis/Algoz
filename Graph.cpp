@@ -39,18 +39,18 @@ Graph::Graph(int _vertexCnt, vector<int> from, vector<int> to) {
 	}
 }
 
-int Graph::getVertexCnt() { return vertexCnt; };
-int Graph::getEdgeCnt() { return edgeCnt; };
+int Graph::getVertexCnt() { return vertexCnt; }
+int Graph::getEdgeCnt() { return edgeCnt; }
 void Graph::addEdge(int from, int to, int weight) {
 	assert(from >= 0 && to >= 0 && from < vertexCnt && to < vertexCnt);
 	edges[from].emplace_back(Edge(from, to, weight));
 	edgeCnt++;
-};
+}
 
 int Graph::addVertex() {
 	edges.emplace_back(vector<Edge>());
 	return vertexCnt++;
-};
+}
 
 void Graph::getShortestOneToAllDijkstra(int from, vector<int> &dist, bool backtrack) {
 	assert(from >= 0 and from < vertexCnt);
@@ -133,4 +133,30 @@ vector<int> Graph::shortestPath(int a, int b) {
 	path.emplace_back(a);
 	reverse(path.begin(), path.end());
 	return path;
+}
+
+bool Graph::hasACycle() {
+	vector<bool> visited(vertexCnt, false);
+
+	for (int i = 0; i < vertexCnt; ++i)
+	{
+		if (!visited[i]) {
+			if (Graph::hasACycleUtil(i, visited))
+				return true;
+		}
+	}
+	return false;
+}
+
+bool Graph::hasACycleUtil(int v, vector<bool> &visited) {
+	visited[v] = true;
+
+	for (Edge ed : edges[v]) {
+		if (visited[ed.to]) return true;
+
+		if (Graph::hasACycleUtil(ed.to, visited))
+			return true;
+	}
+
+	return false;
 }

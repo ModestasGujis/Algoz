@@ -29,5 +29,9 @@ if g.shortestPath(3, 5) != [3, 2, 4, 5]:
 else:
 	print('PASSED')
 
+if not g.hasACycle():
+	print("didn't find a cycle")
+else:
+	print('PASSED')
 
 
