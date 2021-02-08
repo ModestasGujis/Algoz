@@ -24,7 +24,10 @@ to = to + temp;
 # gwei = gr.Graph(7, frm, to, w)
 g = gr.Graph(6, frm, to)
 
-print(g.shortestPath(3, 5))
+if g.shortestPath(3, 5) != [3, 2, 4, 5]:
+	print('wrong path')
+else:
+	print('PASSED')
 
 
 
