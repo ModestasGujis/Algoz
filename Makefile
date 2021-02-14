@@ -3,8 +3,8 @@
 CFLAGS = -O3 -Wall -shared -std=c++11 -fPIC $(shell python3-config --includes) -Iextern/pybind11/include
 OUTPUT = main$(shell python3-config --extension-suffix)
 
-SOURCES = $(wildcard *.cpp)
-HEADERS = $(wildcard *.h)
+SOURCES = $(wildcard *.cpp DSU/*.cpp Graph/*.cpp)
+HEADERS = $(wildcard *.h DSU/*.h Graph/*.h)
 
 .PHONY: all
 

@@ -1,8 +1,8 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include "Graph.h"
-#include "Edge.h"
-#include "DSU.h"
+#include "Graph/Graph.h"
+#include "Graph/Edge.h"
+#include "DSU/DSU.h"
 
 using namespace std;
 namespace py = pybind11;
@@ -20,7 +20,8 @@ PYBIND11_MODULE(main, m) {
 	.def("shortestPath", &Graph::shortestPath)
 	.def("hasACycle", &Graph::hasACycle)
 	.def("topoSort", &Graph::topoSort)
-	.def("connectedComp", &Graph::connectedComp);
+	.def("connectedComp", &Graph::connectedComp)
+	.def("MST", &Graph::MST);
 
 	py::class_<DSU>(m, "DSU")
 	.def(py::init<int>())
