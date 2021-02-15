@@ -215,7 +215,7 @@ void Graph::connectedCompUtil(int v, vector<bool> &visited) {
 			connectedCompUtil(ed.to, visited);
 }
 
-vector<Edge> Graph::MST() {
+vector<vector<int>> Graph::MST() {
 	vector<Edge> all_edges;
 	for (int i = 0; i < vertexCnt; ++i)
 	{
@@ -232,17 +232,17 @@ vector<Edge> Graph::MST() {
 
 	DSU connected(vertexCnt);
 
-	vector<Edge> result;
+	vector<vector<int>> result;
 
 	for (Edge e : all_edges) {
 		if (connected.isSameSet(e.from, e.to)) continue;
 
 		connected.unionSet(e.from, e.to);
-		result.emplace_back(e);
+		result.emplace_back(vector<int>{e.from, e.to, e.weight});
 	}
 
 	if ((int)result.size() != vertexCnt - 1) // graph is not connected
-		return vector<Edge>();
+		return vector<vector<int>>();
 
 	return result;
 }

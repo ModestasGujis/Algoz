@@ -1,6 +1,8 @@
 #!/bin/bash
 
 cd ..
+
+path=main$(python3-config --extension-suffix)
 make
-mv main.cpython-35m-x86_64-linux-gnu.so tests/main.cpython-35m-x86_64-linux-gnu.so
+mv $path tests/$path
 cd tests

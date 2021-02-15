@@ -21,7 +21,7 @@ public:
 	bool hasACycle();
 	vector<int> topoSort();
 	vector<int> connectedComp(int v);
-	vector<Edge> MST();
+	vector<vector<int>> MST();
 private:
 	bool weighted;
 	int vertexCnt;

@@ -10,9 +10,14 @@ import main as gr
 # 2 3 7
 # 3 5 5 
 
-frm = [0, 0, 0, 1, 1, 2, 2, 4]
-to = [2, 4, 5, 4, 5, 3, 4, 5]
+frm = [0, 0, 0, 1, 1, 2, 2, 3]
+to = [2, 3, 5, 3, 5, 4, 3, 5]
 w = [5, 7, 6, 2, 1, 4, 7, 5]
+
+# make undirected
+temp = frm
+frm = frm + to;
+to = to + temp;
 
 undir = gr.Graph(6, frm, to, w)
 
