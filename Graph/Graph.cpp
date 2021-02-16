@@ -3,6 +3,7 @@
 #include <cassert>
 #include <utility>
 #include <stdio.h>
+#include <iostream>
 
 #include "Graph.h"
 #include "../DSU/DSU.h"
@@ -166,31 +167,31 @@ bool Graph::hasACycleUtil(int v, vector<int> &visited) {
 vector<int> Graph::topoSort() {
 	if (Graph::hasACycle()) return vector<int>();
 
-	vector<int> currSort;
+	vector<int> currentrSort;
 	vector<bool> visited(vertexCnt, false);
 
 	for (int i = 0; i < vertexCnt; ++i)
 	{
 		if (!visited[i]) {
-			topoSortUtil(i, currSort, visited);
+			topoSortUtil(i, currentrSort, visited);
 		}
 	}
 
-	reverse(currSort.begin(), currSort.end());
+	reverse(currentrSort.begin(), currentrSort.end());
 
-	return currSort;
+	return currentrSort;
 }
 
-void Graph::topoSortUtil(int v, vector<int> &currSort, vector<bool> &visited) {
+void Graph::topoSortUtil(int v, vector<int> &currentrSort, vector<bool> &visited) {
 	visited[v] = true;
 
 	for (Edge ed : edges[v]) {
 		if (!visited[ed.to]) {
-			Graph::topoSortUtil(ed.to, currSort, visited);
+			Graph::topoSortUtil(ed.to, currentrSort, visited);
 		}
 	}
 
-	currSort.emplace_back(v);
+	currentrSort.emplace_back(v);
 }
 
 vector<int> Graph::connectedComp(int v) {
@@ -245,4 +246,52 @@ vector<vector<int>> Graph::MST() {
 		return vector<vector<int>>();
 
 	return result;
+}
+
+int Graph::maxFlowBFS(int s, int t, vector<int>& parents, vector<vector<int>> capacities) {
+	fill(parents.begin(), parents.end(), -1);
+	parents[s] = -2;
+	queue<pair<int, int>> q;
+	q.push({s, INT32_MAX});
+
+	while(!q.empty()) {
+		int current = q.front().first;
+		int flow = q.front().second;
+		q.pop();
+		
+		for (Edge next : edges[current]) {
+			if(parents[next.to] == -1 && capacities[current][next.to]) {
+				parents[next.to] = current;
+                int new_flow = min(flow, capacities[current][next.to]);
+                if (next.to == t)
+                    return new_flow;
+                q.push({next.to, new_flow});
+			}
+		}
+	}
+	return 0;
+}
+
+int Graph::maxFlow(int source, int sink) {
+	vector<vector<int>> capacities(vertexCnt, vector<int>(vertexCnt, 0));
+	for(int i = 0; i < vertexCnt; i++) {
+		for(Edge j : edges[i]) {
+			capacities[i][j.to] += j.weight;
+		}
+	}
+
+	int flow = 0;
+	vector<int> parent(vertexCnt);
+	int new_flow;
+	while((new_flow = maxFlowBFS(source, sink, parent, capacities))) {
+        flow += new_flow;
+        int current = sink;
+        while (current != source) {
+            int previous = parent[current];
+            capacities[previous][current] -= new_flow;
+            capacities[current][previous] += new_flow;
+            current = previous;
+        }
+    }
+    return flow;
 }

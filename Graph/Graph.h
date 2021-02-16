@@ -22,6 +22,7 @@ public:
 	vector<int> topoSort();
 	vector<int> connectedComp(int v);
 	vector<vector<int>> MST();
+	int maxFlow(int source, int sink);
 private:
 	bool weighted;
 	int vertexCnt;
@@ -32,6 +33,7 @@ private:
 	bool hasACycleUtil(int v, vector<int> &visited);
 	void topoSortUtil(int v, vector<int> &currSort, vector<bool> &visited);
 	void connectedCompUtil(int v, vector<bool> &visited);
+	int maxFlowBFS(int s, int t, vector<int>& parent, vector<vector<int>> capacities);
 };
 
 #endif // GRAPH_H

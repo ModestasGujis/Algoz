@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "algorithm": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "vector": "cpp"
     }
 }

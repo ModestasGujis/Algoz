@@ -21,7 +21,8 @@ PYBIND11_MODULE(main, m) {
 	.def("hasACycle", &Graph::hasACycle)
 	.def("topoSort", &Graph::topoSort)
 	.def("connectedComp", &Graph::connectedComp)
-	.def("MST", &Graph::MST);
+	.def("MST", &Graph::MST)
+	.def("maxFlow", &Graph::maxFlow);
 
 	py::class_<DSU>(m, "DSU")
 	.def(py::init<int>())
