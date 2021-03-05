@@ -1,8 +1,8 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include "Graph/Graph.h"
-#include "Graph/Edge.h"
-#include "DSU/DSU.h"
+#include "Graph/Graph/Graph.h"
+#include "Graph/Graph/Edge.h"
+#include "Graph/DSU/DSU.h"
 
 using namespace std;
 namespace py = pybind11;
