@@ -2,3 +2,6 @@
 	path = extern/pybind11
 	url = ../../pybind/pybind11
 	branch = stable
+[submodule "Algorithms"]
+	path = Algorithms
+	url = git@github.com:ModestasGujis/Algorithms.git
